@@ -1,7 +1,10 @@
 import React from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import {createAppContainer,createSwitchNavigator} from 'react-navigation'
+import {createBottomTabNavigator} from 'react-navigation-tabs'
 import LoginScreen from './screens/LoginScreen';
-import AppDrawerNavigator from './components/AppDrawerNavigator'
+import ExchangeScreen from './screens/ExchangeScreen';
+import HomeScreen from './screens/HomeScreen';
 
 export default function App() {
   return (
@@ -9,9 +12,40 @@ export default function App() {
   );
 }
 
+const TabNavigator = createBottomTabNavigator({
+  Home:{screen: HomeScreen},
+  Exchange:{screen: ExchangeScreen}
+},
+
+{
+defaultNavigationOptions: ({navigation})=>({
+  tabBarIcon: ()=>{
+    const routeName = navigation.state.routeName;
+    if(routeName === "HomeScreen"){
+      return(
+        <Image
+        source={require("./assets/Home.png")}
+        style={{width:20, height:20}}
+      />
+      )
+
+    }
+    else if(routeName === "Exchange"){
+      return(
+        <Image
+        source={require("./assets/exchange.png")}
+        style={{width:20, height:20,}}
+      />)
+
+    }
+  }
+})
+}
+);
+
 const switchNavigator = createSwitchNavigator({
-  LoginScreen:{screen:LoginScreen},
-  Drawer:{screen: AppDrawerNavigator}
+  LoginScreen:{screen: LoginScreen},
+  BottomTab:{screen: TabNavigator}
 })
 
-const AppContainer = createAppContainer(switchNavigator)
+const AppContainer = createAppContainer(switchNavigator);
