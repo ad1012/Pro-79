@@ -50,21 +50,20 @@ const AppDrawNavigator = createDrawerNavigator({
     screen : TabNavigator 
   }, 
   Settings : { 
-    screen : SettingsScreen 
-  } 
-}, 
-{ 
-  contentComponent:CustomSideBar 
-}, 
-{
-   initialRouteName : 'Home' 
-})
+    screen : SettingsScreen
+   } 
+  }, 
+  { 
+    contentComponent: CustomSideBar 
+  }, 
+  { 
+    initialRouteName : 'Home' 
+  })
 
-
-const switchNavigator = createSwitchNavigator({ 
-  WelcomeScreen:{screen: HomeScreen}, 
-  AppDrawNavigator : AppDrawNavigator,
-})
+  const switchNavigator = createSwitchNavigator({ 
+    WelcomeScreen:{screen: LoginScreen}, 
+    AppDrawNavigator : AppDrawNavigator,
+  })
 
 const AppContainer = createAppContainer(switchNavigator);
 
